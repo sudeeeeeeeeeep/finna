@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finna - Super Matches</title>
+  <style>
+    /* --------------------------
+       FONTS & COLOR SCHEME
+       Main brand color now: blue (#1e90ff)
+       Secondary (dark) color now: pink (#d20e60)
+       Accent remains: light blue (#87cefa)
+       -------------------------- */
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap');
+
+    :root {
+      --mainBrand: #1e90ff;   /* Blue for main backgrounds */
+      --darkBrand: #d20e60;   /* Pink for top band & accents */
+      --accent: #87cefa;      /* Light blue accent */
+      --white: #fff;
+      --dark: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--white);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* --- TOP STRIP --- */
+    .top-band {
+      background: var(--darkBrand);
+      color: var(--white);
+      font-size: 0.9rem;
+      padding: 8px 15px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      width: 100%;
+      position: relative;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, var(--mainBrand), var(--darkBrand));
+      border-radius: 10px;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .hero .hero-symbol {
+      font-size: 50px;
+      color: var(--white);
+      margin-bottom: 15px;
+    }
+    /* (Hero text removed as per previous instructions) */
+
+    /* --- MAIN WRAPPER --- */
+    .wrapper {
+      background: var(--mainBrand);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* --- BRAND NAME --- */
+    .brand-container {
+      position: relative;
+      margin: 40px 0 10px;
+    }
+    .brand {
+      font-family: 'Baloo 2', cursive;
+      font-size: 5rem;
+      color: var(--white);
+      text-align: center;
+    }
+    /* Decorative circles behind the brand */
+    .brand-container::before,
+    .brand-container::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.8;
+      z-index: -1;
+    }
+    .brand-container::before {
+      top: -20px;
+      left: -20px;
+      width: 80px;
+      height: 80px;
+      background: var(--darkBrand);
+      box-shadow: 0 0 15px rgba(210,14,96,0.5);
+      animation: floatLeft 5s infinite alternate ease-in-out;
+    }
+    .brand-container::after {
+      bottom: -20px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      background: var(--accent);
+      box-shadow: 0 0 15px rgba(135,206,250,0.5);
+      animation: floatRight 5s infinite alternate ease-in-out;
+    }
+    @keyframes floatLeft {
+      from { transform: translateY(0); }
+      to { transform: translateY(15px) rotate(5deg); }
+    }
+    @keyframes floatRight {
+      from { transform: translateY(0); }
+      to { transform: translateY(-15px) rotate(-5deg); }
+    }
+
+    /* --- TAGLINE & SUBHEADINGS --- */
+    .tagline {
+      font-size: 1.3rem;
+      color: var(--white);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .subheading {
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: 10px;
+      text-transform: capitalize;
+    }
+
+    /* --- HIGHLIGHT STAT --- */
+    .highlight {
+      font-size: 1.2rem;
+      color: var(--white);
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 12px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      animation: pulse 3s infinite ease-in-out;
+      text-align: center;
+      max-width: 80%;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 5px rgba(255,255,255,0.2); }
+      50% { box-shadow: 0 0 15px rgba(255,255,255,0.4); }
+      100% { box-shadow: 0 0 5px rgba(255,255,255,0.2); }
+    }
+
+    /* --- WHITE CONTAINERS --- */
+    .info-box, .daily-bites, .testimonials, .info-section, .team-section {
+      background: var(--white);
+      color: var(--dark);
+      border-radius: 10px;
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      margin: 30px auto;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+    .info-box h3, .info-section h3, .team-section h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      color: var(--darkBrand);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .info-box ul, .daily-bites ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .info-box li {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+    }
+    .info-box li::before {
+      content: '•';
+      color: var(--darkBrand);
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    /* --- SYMBOLS --- */
+    .symbol {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-right: 8px;
+    }
+
+    /* --- CTA BUTTON --- */
+    .cta-button {
+      background: var(--darkBrand);
+      color: var(--white);
+      border: none;
+      border-radius: 5px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin: 20px 0 20px;
+      display: inline-block;
+    }
+    .cta-button:hover {
+      background: #c24a70;
+    }
+
+    /* --- DAILY BITES --- */
+    .daily-bites h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: var(--darkBrand);
+      margin-bottom: 15px;
+    }
+    .daily-bites li {
+      margin: 10px 0;
+      border-left: 3px solid var(--darkBrand);
+      padding-left: 10px;
+    }
+    .daily-bites li a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .daily-bites li a:hover {
+      color: var(--darkBrand);
+    }
+
+    /* --- TESTIMONIALS --- */
+    .testimonials h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .testimonial {
+      margin-bottom: 15px;
+      font-style: italic;
+      position: relative;
+      padding-left: 30px;
+    }
+    .testimonial::before {
+      content: '“';
+      font-family: 'Baloo 2', cursive;
+      font-size: 2rem;
+      color: var(--darkBrand);
+      position: absolute;
+      left: 0;
+      top: -5px;
+    }
+    .testimonial::after {
+      content: '”';
+      font-family: 'Baloo 2', cursive;
+      font-size: 2rem;
+      color: var(--darkBrand);
+      position: absolute;
+      right: -10px;
+      bottom: -5px;
+    }
+    .author {
+      display: block;
+      margin-top: 5px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    /* --- ADDITIONAL INFO SECTIONS --- */
+    .info-section p, .team-section p {
+      margin-bottom: 10px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* --- OUR TEAM --- */
+    .team-section .symbol-team {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-right: 10px;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    /* --- WAVE SHAPE --- */
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .wave svg {
+      display: block;
+      width: calc(150% + 1.3px);
+      height: 120px;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 600px) {
+      .brand {
+        font-size: 2.3rem;
+      }
+      .tagline {
+        font-size: 1rem;
+      }
+      .subheading {
+        font-size: 1.1rem;
+      }
+      .highlight {
+        font-size: 1rem;
+      }
+      .info-box, .daily-bites, .testimonials, .info-section, .team-section {
+        padding: 15px;
+      }
+      .daily-bites h2, .testimonials h2, .info-section h3, .team-section h3 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- TOP STRIP -->
+  <div class="top-band">
+    Super Jobs. Super Recruiters. Super Tools. Super Delish.
+  </div>
+
+  <!-- MAIN WRAPPER -->
+  <div class="wrapper">
+    <!-- HERO SECTION WITH SYMBOL -->
+    <section class="hero">
+      <div class="hero-symbol">★<br>THE NEW NORMAL OF JOB SEARCHING</div>
+    </section>
+
+    <!-- BRAND NAME -->
+    <div class="brand-container">
+      <div class="brand">Finna</div>
+    </div>
+
+    <!-- TAGLINE & SUBHEADINGS -->
+    <div class="tagline">Super Matches</div>
+    <div class="subheading">Lightning-Fast + Magical</div>
+
+    <!-- HIGHLIGHT STAT -->
+    <div class="highlight">
+      93% of Our Users Find the Perfect Job in Under a Month
+    </div>
+
+    <!-- INFO BOX: What's Inside Finna -->
+    <div class="info-box">
+      <h3><span class="symbol">★</span>What's Inside Finna?</h3>
+      <ul>
+        <li>AI-Powered Job Recommendations</li>
+        <li>Verified Employers & Real-Time Alerts</li>
+        <li>One-Click Applications for Speed</li>
+        <li>Expert Tips & Career Guidance</li>
+      </ul>
+      <div class="labels">
+        <div class="label">Tech, Finance & More</div>
+        <div class="label">Remote & On-site Roles</div>
+        <div class="label">No Hidden Fees</div>
+        <div class="label">100% Magic</div>
+      </div>
+    </div>
+
+    <!-- ADDITIONAL SECTION: About Finna -->
+    <div class="info-section">
+      <h3><span class="symbol">★</span>About Finna</h3>
+      <p>Finna is a revolutionary job search platform that combines cutting-edge technology with a touch of magic. Our mission is to empower job seekers by offering personalized, lightning-fast job matches and expert career guidance.</p>
+      <p>Whether you're an experienced professional or just starting out, Finna is designed to cater to your career aspirations and help you discover opportunities that truly match your skills.</p>
+    </div>
+
+    <!-- ADDITIONAL SECTION: Why Choose Finna -->
+    <div class="info-section">
+      <h3><span class="symbol">★</span>Why Choose Finna?</h3>
+      <p>We provide a transformative job search experience by leveraging advanced AI, ensuring you receive only the most relevant job opportunities. Our verified employer network guarantees quality positions and instant alerts.</p>
+      <ul>
+        <li>Intelligent, AI-driven job matching</li>
+        <li>Verified employers with quality opportunities</li>
+        <li>Instant alerts and one-click applications</li>
+        <li>Comprehensive career resources and support</li>
+      </ul>
+      <p>Join our community and transform your career journey with Finna.</p>
+    </div>
+
+    <!-- CTA BUTTON -->
+<button class="cta-button" onclick="window.location.href='C:/Users/USER/Downloads/waitlist.html'">
+  Join the Waitlist
+</button>
+
+
+    <!-- DAILY BITES SECTION WITH HYPERLINKS -->
+    <div class="daily-bites">
+      <h2>Daily Bites</h2>
+      <ul>
+        <li><a href="C:\Users\USER\Downloads\resume-alchemy.html" target="_blank">Resume Alchemy: Transform your CV into a masterpiece.</a></li>
+        <li><a href="C:\Users\USER\Downloads\interview-mastery.html" target="_blank">Interview Mastery: Ace every question with confidence.</a></li>
+        <li><a href="C:\Users\USER\Downloads\salary-sorcery.html" target="_blank">Salary Sorcery: Unlock your true earning potential.</a></li>
+        <li><a href="C:\Users\USER\Downloads\productivity-charms.html" target="_blank">Productivity Charms: Stay sharp and focused daily.</a></li>
+        <li><a href="C:\Users\USER\Downloads\future-of-work.html" target="_blank">Future of Work: Embrace the evolving job market.</a></li>
+      </ul>
+    </div>
+
+    <!-- TESTIMONIALS SECTION -->
+    <div class="testimonials">
+      <h2>Testimonials</h2>
+      <div class="testimonial">
+        Finna made job hunting fun and rewarding! I found a role I love in just 2 weeks.
+        <span class="author">- Ananya S.</span>
+      </div>
+      <div class="testimonial">
+        The instant alerts and one-click applications saved me so much time.
+        <span class="author">- Rahul M.</span>
+      </div>
+      <div class="testimonial">
+        As a recruiter, I can reach top talent faster than ever. Finna is a game-changer!
+        <span class="author">- Priya R.</span>
+      </div>
+    </div>
+
+    <!-- OUR TEAM SECTION -->
+    <div class="team-section">
+      <h3><span class="symbol">★</span>Our Magical Team</h3>
+      <p>Our diverse team of innovators, tech wizards, and career experts works relentlessly to bring you a platform that revolutionizes the job search experience. We're here to empower you every step of the way.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      &copy; 2025 Finna. All rights reserved. | Built with 100% magic
+    </div>
+
+    <!-- DECORATIVE WAVE -->
+    <div class="wave">
+      <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+        <path d="M-3.16,110.86 C156.03,107.37 349.86,31.59 501.14,114.40 L500.00,150.00 L0.00,150.00 Z"
+              style="stroke: none; fill: var(--darkBrand);"></path>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>
