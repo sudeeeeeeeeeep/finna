@@ -1,45 +1,37 @@
 const fs = require('fs');
 const path = require('path');
 
-const siteUrl = "https://finnajobs.netlify.app"; // Change this to your domain
-const publicDir = path.join(__dirname, 'public');
+// Define your website domain (update this accordingly)
+const websiteUrl = 'https://finnajobs.netlify.app';
 
-// Ensure the `public` directory exists
-if (!fs.existsSync(publicDir)) {
-    fs.mkdirSync(publicDir, { recursive: true });
-}
+// List of pages (Modify this to include all your site URLs)
+const pages = [
+    '/',
+    '/dreamjob.html',
+    '/interview-mastery.html',
+    '/productivity-charms.html',
+    '/resume-alchemy.html',
+    '/salary-sorcery.html',
+    '/waitlist.html'
+];
 
-// Function to get all `.html` files in the project
-const getHtmlFiles = (dir, fileList = []) => {
-    const files = fs.readdirSync(dir);
-    files.forEach(file => {
-        const filePath = path.join(dir, file);
-        if (fs.statSync(filePath).isDirectory()) {
-            getHtmlFiles(filePath, fileList);
-        } else if (file.endsWith('.html')) {
-            fileList.push(filePath.replace(__dirname, '').replace(/\\/g, '/'));
-        }
-    });
-    return fileList;
-};
-
-// Get all `.html` pages in the repository
-const htmlFiles = getHtmlFiles(__dirname);
-
-// Generate sitemap XML
+// Generate sitemap content
 const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${htmlFiles.map(file => `
-    <url>
-        <loc>${siteUrl}${file}</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <priority>0.8</priority>
-    </url>
-    `).join('')}
+${pages.map(page => `
+  <url>
+    <loc>${websiteUrl}${page}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+`).join('')}
 </urlset>`;
 
-// Write the sitemap to `public/sitemap.xml`
-fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemapContent, 'utf8');
+// Write sitemap.xml to the root directory
+const sitemapPath = path.join(__dirname, 'sitemap.xml');
 
-console.log("✅ Sitemap generated successfully!");
+fs.writeFileSync(sitemapPath, sitemapContent, 'utf8');
+console.log('✅ Sitemap successfully created at sitemap.xml');
+
 
