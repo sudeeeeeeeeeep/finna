@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const siteUrl = "https://yourwebsite.com"; // Change this to your domain
+const siteUrl = "https://finnajobs.netlify.app"; // Change this to your domain
 const publicDir = path.join(__dirname, 'public');
 
 // Ensure the `public` directory exists
