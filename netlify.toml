@@ -1,0 +1,3 @@
+[build]
+  command = "node generateSitemap.js && npm run build"
+  publish = "public"
