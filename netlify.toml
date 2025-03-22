@@ -1,6 +1,6 @@
 [build]
   command = "node generateSitemap.js"
-  publish = "public"
+  publish = "."
 
 [[redirects]]
   from = "/sitemap.xml"
